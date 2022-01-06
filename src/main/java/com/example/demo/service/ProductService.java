@@ -19,7 +19,7 @@ public class ProductService {
     //Add Product(Post)
     public String addProduct(Product product){
         repository.save(product);
-        return "Product Created";
+        return "Product Created!!";
      }
 
 
@@ -36,7 +36,7 @@ public class ProductService {
         if(temp.isPresent())
             return repository.findById(id).get();
         else
-            throw new NoSuchElementException("PRODUCT NOT FOUND");
+            throw new NoSuchElementException("PRODUCT NOT FOUND!!");
     }
 
     //Delete Product(Delete)
@@ -44,10 +44,10 @@ public class ProductService {
         Optional<Product> temp=repository.findById(id);
         if(temp.isPresent()){
            repository.deleteById(id);
-           return "PRODUCT REMOVED";
+           return "PRODUCT REMOVED!!";
         }
         else
-            throw new NoSuchElementException("No Product Found");
+            throw new NoSuchElementException("No Product Found!!");
     }
 
     //Update Product(Put)
@@ -74,7 +74,7 @@ public class ProductService {
             return s;
         }
         else
-            throw new NoSuchElementException("NO Employee Found Here");
+            throw new NoSuchElementException("Product Not Found");
     }
 
 }
