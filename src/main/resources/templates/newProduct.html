@@ -1,54 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<html lang="en" xmlns:th="http://www.thymeleaf.com"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Create New Product</title>
+    <title>Adding New Product</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
-
 </head>
 <body>
 <nav class="navbar navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
-            <a class="navbar-brand" href="#" th:href="@{/products}">Manage Employees</a>
+            <a class="navbar-brand" href="#" th:href="@{/products}">Manage Products</a>
             <a class="navbar-brand" href="#" th:href="@{/contact}">Contact Us</a>
+            <ul class="nav navbar-nav">
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+            </ul>
         </div>
     </div>
 </nav>
 <br/>
 <br/>
-<div class="container" align="center">
-
-    <h1>Add New Product</h1>
+<br/>
+<br/>
+<div  class="container">
+    <div th:if="${param.success}">
+        <div class="alert alert-info">Product Added! Add More...</div>
+    </div>
+    <h1>Adding New Product</h1>
     <br/>
-
-    <form autocomplete="off" action="#" th:action="@{/save}" th:object="${product}" method="post" >
-        <table border="0">
-            <tr>
-                <td>Product Name:</td>
-                <td><input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4" required/></td>
-            </tr>
-            <tr>
-                <td>Internal Memory:</td>
-                <td><input type="text" th:field="*{memory}" placeholder="Memory" class="form-control mb-4 col-4" required/></td>
-            </tr>
-            <tr>
-                <td>Price:</td>
-                <td><input type="number" th:field="*{price}" placeholder="Price" class="form-control mb-4 col-4" required/></td>
-            </tr>
-            <tr>
-                <td><button type="submit" class="btn btn-success col-2" onclick="bootstrapAlert()" >Save</button></td>
-            </tr>
-        </table>
+    <form autocomplete="off" action="#" th:action="@{/save}" th:object="${product}" method="post">
+        <div class="form-group">
+            <label class="control-label" for="name"> Product Name: </label>
+            <input id="name"  class="form-control mb-4 col-4" th:field="*{name}"
+                   required autofocus="autofocus" placeholder="Name" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="memory"> Internal Memory: </label>
+            <select name="memory" id="memory" required  autofocus="autofocus" th:field="*{memory}" class="form-control mb-4 col-4">
+                <option value="select">Select Memory</option>
+                <option value="32GB">32GB</option>
+                <option value="64GB">64GB</option>
+                <option value="128GB">128GB</option>
+                <option value="256GB">256GB</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="price">Price: </label>
+            <input id="price" type="number" class="form-control mb-4 col-4" th:field="*{price}"
+                   required autofocus="autofocus" placeholder="Price" />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
     </form>
+
 </div>
-<script src="" th:src="@{myjs.js}"></script>
+
 </body>
 </html>

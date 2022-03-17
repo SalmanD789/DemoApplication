@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.com"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Adding New Product</title>
-
+    <title>Edit Product</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
@@ -14,7 +13,7 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
-            <a class="navbar-brand" href="#" th:href="@{/products}">Manage Products</a>
+            <a class="navbar-brand" href="#" th:href="@{/products}">Manage Employees</a>
             <a class="navbar-brand" href="#" th:href="@{/contact}">Contact Us</a>
             <ul class="nav navbar-nav">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
@@ -24,15 +23,15 @@
 </nav>
 <br/>
 <br/>
-<br/>
-<br/>
-<div  class="container">
-    <div th:if="${param.success}">
-        <div class="alert alert-info">Product Added! Add More...</div>
-    </div>
-    <h1>Adding New Product</h1>
+
+<div class="container">
+    <h1>Edit Product</h1>
     <br/>
-    <form autocomplete="off" action="#" th:action="@{/save}" th:object="${product}" method="post">
+    <form autocomplete="off" action="#" th:action="@{/update}" th:object="${product}" method="post">
+        <div class="form-group">
+            <label class="control-label" for="Id"> Product Id: </label>
+            <input id="Id" type="text" class="form-control mb-4 col-4" th:field="*{id}" readonly="readonly"/>
+        </div>
         <div class="form-group">
             <label class="control-label" for="name"> Product Name: </label>
             <input id="name"  class="form-control mb-4 col-4" th:field="*{name}"
@@ -57,7 +56,6 @@
             <button type="submit" class="btn btn-success">Save</button>
         </div>
     </form>
-
 </div>
 
 </body>
